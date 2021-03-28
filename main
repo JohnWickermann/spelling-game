@@ -1,0 +1,72 @@
+#program for spelling game
+#9 random letters generated
+#user gets 60 seconds to form a word
+#word with most letters wins more points
+
+import random
+import enchant
+
+game_dictionary = enchant.Dict("en_UK")
+
+consonant = [
+    "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s",
+    "t", "v", "x", "y", "z"
+]
+vowel = ["a", "e", "i", "o", "u"]
+
+slot = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+
+def scramble():
+    for x in range(0, 9):
+        a = random.uniform(0, 20)
+        b = random.uniform(0, 5)
+        c = consonant[int(a)]
+        v = vowel[int(b)]
+        y = random.uniform(0, 2)
+        if y > 1:
+            x = c
+            print(c)
+        elif y < 2:
+            x = v
+            print(v)
+  
+
+
+def spelloff():
+    x = input("Spell a word from the letters presented: ")
+    points = 0
+    if x == type(int):
+        print("Letters only")
+    elif len(x) == 9 and game_dictionary.check(x) == True:
+        print(x)
+        print("valid word. 10 points")
+        points = 10
+    elif len(x) == 8 and game_dictionary.check(x) == True:
+        print(x)
+        print("valid word. 8 points")
+        points = 8
+    elif len(x) == 7 and game_dictionary.check(x) == True:
+        print(x)
+        print("valid word. 7 points")
+        points = 7
+    elif len(x) == 6 and game_dictionary.check(x) == True:
+        print(x)
+        print("valid word. 6 points")
+        points = 6
+    elif len(x) <= 5 and game_dictionary.check(x) == True:
+        print(x)
+        print("valid word. 5 points")
+        points = 5
+    elif game_dictionary.check(x) == False:
+        print(x)
+        print("not a valid word. no points")
+        points = 0
+
+
+print("Welcome to spell-off")
+print("Here are your letters")
+print(" ")
+scramble()
+print(" ")
+spelloff()
